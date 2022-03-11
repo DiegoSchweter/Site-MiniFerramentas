@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    
+    <title>Pegar Miniatura - Youtube</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">    
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+	<meta name="author" content="Diego Schweter">
+	<meta name="description" content="Pegar Miniatura de Qualquer Vídeo do Youtube - Site fácil de ser utilizado" />
+	<meta name="keywords" content="pegar thumbnail, gerar thumbnail, pegar miniatura, gerar miniatura, pegar thumb, gerar thumb" />
+	<meta name="robots" content="index,follow">
+	<meta property="og:title" content="Pegar Miniatura de Qualquer Vídeo do Youtube">
+	<meta property="og:site_name" content="Pegar Miniatura de Qualquer Vídeo do Youtube">
+	<meta property="og:description" content="Pegar Miniatura de Qualquer Vídeo do Youtube - Site fácil de ser utilizado">
+	<meta property="og:url" content="">
+	<meta property="og:image" content="https://www.gstatic.com/youtube/img/creator/yt_studio_logo_white.svg">
+	<meta property="og:image:type" content="image/jpeg">
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <style type="text/css">
+        *{
+            margin:0;
+            padding:0;
+            box-sizing: border-box;
+        }
+        html {
+            height: 100%;
+        }
+        body {
+            background-color: #eee;
+            display: flex;
+            height: 100%;
+            flex-direction:column !important;
+            font-family: 'Poppins', sans-serif;
+        }
+        main {
+            flex-shrink: 0!important;
+        }
+		.container{
+			max-width: 960px;
+			margin:10px auto;
+			padding:0 2%;
+			text-align: center;
+		}
+		.container h2{
+			font-size: 40px;
+			margin:30px 0;
+		}
+
+		.container p{
+			font-size: 19px;
+            margin-bottom: 20px;
+		}
+
+		.container input[type=text]{
+			width:100%;
+			border-radius:8px;
+			height: 40px;
+			border: 1px solid #ccc;
+            text-align: center;
+            font-size: 20px;
+		}
+
+		.container input[type=submit]{
+			display: block;
+			margin:10px 0;
+			font-size: 20px;
+			color: white;
+			width:100%;
+			height: 40px;
+			cursor: pointer;
+			border: 0;
+            border-radius: 5px;
+			background-color: red;
+		}
+
+        .w120 { max-width: 120px; }
+        .w320 { max-width: 320px; }
+        .w480 { max-width: 480px; }
+        .w640 { max-width: 640px; }
+        .w1280 { max-width: 1280px; }
+
+        .resultado {
+            margin: 30px 0;
+        }
+
+        .tamanho-imagem {
+            background-color: #0e0e0e;
+            color: white;
+            margin: 10px auto 0 auto;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        h3 {
+            margin: 30px 0;
+            font-weight: 300;
+        }
+
+        footer {
+            display: block;
+            margin-top: auto !important;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 13px;
+        }
+	</style>
+</head>
+<body>
+    <main>
+        <div class="container">
+            <h2>Pegue Miniatura de Qualquer Vídeo do Youtube</h2>
+            <p>
+                Para pegar a Miniatura do vídeo do Youtube<br/>
+                Basta inserir a URL, conforme exemplo abaixo:<br/><br />
+                <b>http://www.youtube.com/watch?v=erLk59H86ww</b>
+            </p>
+
+            <div>
+                <input type="text" name="url">
+                <input type="submit" name="btn" value="Pegar Miniatura do Youtube!">
+            </div>
+
+            <div class="resultado"></div>
+                        
+
+            <h3>Ferramenta simples e elegante! <br />
+                Achou útil? Em breve teremos mais!</h3>
+            
+        </div>
+    </main>
+    <footer>Esta ferramenta foi desenvolvida por Diego Schweter.</footer>
+    <script>
+        document.querySelector('input[type=submit]').addEventListener('click',()=> {
+            let url = document.querySelector('input[name=url]').value;
+            let resultado = document.querySelector('.resultado');
+
+            
+            if (!url.includes('?v='))
+                resultado.innerHTML = '=/ Preencha o campo com um link no formato citado.'
+            else { 
+                let id_video = url.split('v=')[1];
+                if(id_video.includes('&')) id_video = id_video.split('&')[0];
+
+                let link_p = 'http://img.youtube.com/vi/' + id_video + '/default.jpg';
+
+
+                resultado.innerHTML = `
+                    <h2>Sua Miniatura:</h2>
+
+                    <div class="tamanho-imagem w120">Pequeno: 120x90</div>
+                    <img src="http://img.youtube.com/vi/${id_video}/default.jpg" />
+
+                    <div class="tamanho-imagem w320">Qualidade Média: 320x180</div>
+                    <img src="http://img.youtube.com/vi/${id_video}/mqdefault.jpg" />
+                    
+                    <div class="tamanho-imagem w480">Alta Qualidade: 480x360</div>
+                    <img src="http://img.youtube.com/vi/${id_video}/hqdefault.jpg" />
+
+                    <div class="tamanho-imagem w640">Resolução Padrão: 640x480</div>
+                    <img src="http://img.youtube.com/vi/${id_video}/sddefault.jpg" />
+
+                    <div class="tamanho-imagem w1280">Resolução Máxima: 1280x720</div>
+                    <img src="http://img.youtube.com/vi/${id_video}/maxresdefault.jpg" />
+
+                    <br /><br />
+                    <p> Clique com o botão direito do mouse > Salvar imagem como... ou <br />
+                        Se estiver no celular, aperte e segure na foto para salvar ou compartilhar ;)</p>
+                `
+            }
+        });
+    </script>
+</body>
+</html>
