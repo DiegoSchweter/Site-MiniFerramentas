@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
     
-    <title>Pegar Miniatura - Youtube</title>
+    <title>Pegar Miniatura do Youtube - MiniFerramentas</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">    
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -37,6 +37,21 @@
             height: 100%;
             flex-direction:column !important;
             font-family: 'Poppins', sans-serif;
+        }
+        a {
+            font-weight: bold;
+            color: #333;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #2980B9;
+        }
+        header{
+            background-color: #2980B9;
+            text-align: center;
+            color:white;
+            padding:20px 0;
+            margin-bottom: 30px;
         }
         main {
             flex-shrink: 0!important;
@@ -114,9 +129,11 @@
 	</style>
 </head>
 <body>
+    <header>
+        <h1>Pegue Miniatura de Vídeo do Youtube</h1>
+    </header>
     <main>
         <div class="container">
-            <h2>Pegue Miniatura de Qualquer Vídeo do Youtube</h2>
             <p>
                 Para pegar a Miniatura do vídeo do Youtube<br/>
                 Basta inserir a URL, conforme exemplo abaixo:<br/><br />
@@ -132,11 +149,12 @@
                         
 
             <h3>Ferramenta simples e elegante! <br />
-                Achou útil? Em breve teremos mais!</h3>
+                Achou útil? <a href="/index.html">Conheça mais!</a></h3>
             
         </div>
     </main>
-    <footer>Esta ferramenta foi desenvolvida por Diego Schweter.</footer>
+    <footer>Esta ferramenta foi desenvolvida por <a href="/index.html">MiniFerramentas</a>.</footer>
+
     <script>
         document.querySelector('input[type=submit]').addEventListener('click',()=> {
             let url = document.querySelector('input[name=url]').value;
