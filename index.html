@@ -6,35 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MiniFerramentas - Tudo online e Grátis</title>
 
+    <link rel="stylesheet" href="style.css">
+
     <style>
-        *{
-            margin:0;
-            padding:0;
-            box-sizing: border-box;
-        }
-        html {
-            height: 100%;
-        }
-        body {
-            background-color: #eee;
-            display: flex;
-            height: 100%;
-            flex-direction:column !important;
-            font-family: 'Poppins', sans-serif;
-        }
-        a {
-            color: #333;
-            text-decoration: none;
-        }
-        header{
-            background-color: #2980B9;
-            text-align: center;
-            color:white;
-            padding:20px 0;
-        }
-        main {
-            flex-shrink: 0 !important;
-        }
 		.container{
 			max-width: 1110px;
 			margin:10px auto;
@@ -56,7 +30,7 @@
             border-radius: 10px 0 0 10px;
             font-size: 20px;
         }
-        .busca input[type=submit]{
+        .busca button[type=submit]{
             background-color: #2980B9;
             color: #fff;
             border: 1px solid #2980B9;
@@ -73,6 +47,7 @@
         #cards {
             display: flex;   
             flex-wrap: wrap;
+            width: 100%;
         }
         .card {
             border: 1px solid #ccc;            
@@ -113,26 +88,8 @@
             background-color: green;
             color: #fff;
         }
-        footer {
-            display: block;
-            margin-top: auto !important;
-            padding: 10px 0;
-            text-align: center;
-            font-size: 13px;
-        }        
-        footer a {
-            font-weight: bold;
-        }
-        footer a:hover {
-            color: #2980B9;
-        }
 
-        @media (min-width:320px) { /* smartphones retrato */ 
-        
-        }
-        @media (min-width:480px) { /* smartphones paisagem */ 
-        
-        }
+
         @media (min-width:600px) { /* tablets, retrato */ 
             .card {
                 width: 48%;
@@ -151,10 +108,9 @@
                 margin: 10px 1%;
             }
         }
-        @media (min-width:1281px) { /* laptops and desktops, Alta resolução */ 
-        
-        }
     </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4150345279897826"
+    crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
@@ -165,7 +121,10 @@
         <div class="container">
             <div class="busca">
                 <input type="text" name="txtBusca" placeholder="O que está precisando..." />
-                <input type="submit" name="btnBuscar" value="Buscar" />
+                
+                <button type="submit" name="btnBuscar">
+                    <i class="fas fa-search fa-lg"></i>
+                </button>
             </div>
 
             <h2>Todas as MiniFerramentas</h2>
@@ -177,51 +136,70 @@
 
     <footer>Esta ferramenta foi desenvolvida por <a href="/index.html">MiniFerramentas</a>.</footer>
 
+    <script
+      src="https://kit.fontawesome.com/f9e19193d6.js"
+      crossorigin="anonymous"
+    ></script>
     <script>
         let links = [
             {
                 nome: 'Pegar Miniaturas',
                 link: '/pegar-miniaturas-youtube/',
-                descricao: 'Com apenas o link, pegue facilmente a miniatura (thumbnail) de qualquer vídeo do Youtube em diversas resoluções.',
+                descricao: 'Com apenas o link, você pode pegar facilmente a miniatura (thumbnail) de qualquer vídeo do Youtube em diversas resoluções.',
                 cor: 'red'
             },
             {
                 nome: 'Gerador de Senha',
                 link: '/gerador-senha/',
-                descricao: 'Gere facilmente uma senha entre 5 e 25 caracteres.',
+                descricao: 'Use o gerador para criar facilmente uma senha entre 5 e 25 caracteres.',
                 cor: 'black'
             },
             {
                 nome: 'Lista de Tarefas',
                 link: '/lista-tarefas/',
-                descricao: 'Uma mini ferramenta para quando você precisar fazer uma listinha rápida.',
+                descricao: 'Utilize para quando você precisar fazer uma lista de tarefas rápida.',
                 cor: 'green'
             },
         ];
-        /*
+        loadCards(links);
+        
         document.querySelector('input[name=txtBusca]').addEventListener('input',()=> {
             busca();
         });
 
-        document.querySelector('input[name=btnBuscar]').addEventListener('click',()=> {
+        document.querySelector('button[name=btnBuscar]').addEventListener('click',()=> {
             busca();
         });
 
         function busca() {
-            let busca = document.querySelector('input[name=txtBusca]');
+            let busca = document.querySelector('input[name=txtBusca]').value.toLowerCase();
 
-            console.log(links.find(termo => termo.nome === busca))
+            if (busca != "") {
+                let linksFilter = "";
+
+                linksFilter = links.filter((item) => {
+                    return item.descricao.toLowerCase().includes(busca);
+                });
+                
+                loadCards(linksFilter);
+            }
+            else
+                loadCards(links);
         }
-*/
-        for (let i = 0; i <= links.length - 1; i++) {
-            document.querySelector('#cards').innerHTML +=
-                `
-                <a href="${links[i].link}" class="card">
-                    <h3 class="${links[i].cor}">${links[i].nome}</h3>
-                    <p>${links[i].descricao}</p>
-                </a>
-                `
-        };
+
+        function loadCards(list) {
+            document.querySelector('#cards').innerHTML = "";
+
+            for (let i = 0; i <= list.length - 1; i++) {
+                document.querySelector('#cards').innerHTML +=
+                    `
+                    <a href="${list[i].link}" class="card">
+                        <h3 class="${list[i].cor}">${list[i].nome}</h3>
+                        <p>${list[i].descricao}</p>
+                    </a>
+                    `
+            };
+        }
 
         
     </script>

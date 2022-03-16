@@ -11,26 +11,31 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="../style.css" />
   </head>
   <body>
     <header>
         <h1>Lista de Tarefas</h1>
     </header>
+    <main>
+      <div class="container">
+        <div class="new-task-container">
+          <input
+            type="text"
+            class="new-task-input"
+            placeholder="Tarefa para ser feita..."
+          />
 
-    <div class="container">
-      <div class="new-task-container">
-        <input
-          type="text"
-          class="new-task-input"
-          placeholder="Tarefa para ser feita..."
-        />
+          <button class="new-task-button">Adicionar</button>
+        </div>
 
-        <button class="new-task-button">Adicionar</button>
+        <div class="tasks-container"></div>
       </div>
 
-      <div class="tasks-container"></div>
-    </div>
+      <h4>Ferramenta simples e elegante! <br />
+        Achou útil? <a href="/index.html">Conheça mais!</a></h4>
+    </main>
     <footer>Esta ferramenta foi desenvolvida por <a href="/index.html">MiniFerramentas</a>.</footer>
 
     <script

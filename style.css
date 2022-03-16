@@ -1,0 +1,86 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;    
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    background-color: #eee;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction:column !important;
+    font-family: 'Poppins', sans-serif;
+}
+
+header{
+    background-color: #2980B9;
+    text-align: center;
+    color:white;
+    padding:20px 5px;
+}
+
+
+a {
+    color: #333;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #2980B9;
+}
+
+
+img {
+    max-width: 100%;
+}
+
+
+h4 {
+    margin: 40px 0;
+    font-weight: 300;
+    font-size: 18px;
+}
+
+
+footer {
+    display: block;
+    margin-top: auto !important;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 13px;
+} 
+
+footer a {
+    font-weight: bold;
+}
+
+footer a:hover {
+    color: #2980B9;
+}
+
+
+
+@media (min-width:320px) { /* smartphones retrato */ 
+        
+}
+@media (min-width:480px) { /* smartphones paisagem */ 
+
+}
+@media (min-width:600px) { /* tablets, retrato */ 
+    
+}
+@media (min-width:801px) { /* tablets, paisagem */ 
+    
+}
+@media (min-width:1025px) { /* laptops and desktops */ 
+    
+}
+@media (min-width:1281px) { /* laptops and desktops, Alta resolução */ 
+
+}

@@ -1,31 +1,13 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-html {
-    height: 100%;
-}
-body {
-  height: 100%;
-  background-color: #eee;
-  display: flex;
-  flex-direction:column !important;
-  font-family: "Poppins", sans-serif;
-}
-header{
-    background-color: #2980B9;
-    text-align: center;
-    color:white;
-    padding:20px 0;
-    margin-bottom: 30px;
+
+main {
+  text-align: center;
 }
 
 .container {
-  border: 2px solid #fff;
-  padding: 30px 40px;
-  width: 40%;
-  min-width: 500px;
+  border: 2px solid #ccc;
+  padding: 30px 20px;
+  width: 100%;
+  max-width: 600px;
   margin: 50px auto;
 }
 
@@ -105,21 +87,4 @@ header{
 
 .completed {
   text-decoration: line-through;
-}
-
-
-footer {
-  display: block;
-  margin-top: auto !important;
-  padding: 10px 0;
-  text-align: center;
-  font-size: 13px;
-}
-footer a {
-  font-weight: bold;
-  text-decoration: none;
-  color: #333;
-}
-footer a:hover {
-  color: #2980B9;
 }
