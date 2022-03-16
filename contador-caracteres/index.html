@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador de Caracteres - MiniFerramentas</title>
+        
+    <link rel="stylesheet" href="../style.css">
+    <style>        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            /*position: absolute;
+            transform: translate(-50%,-50%);
+            top: 50%;
+            left: 50%;*/
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 400px;
+            resize: none;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            line-height: 22px;
+            padding: 15px;
+            border-radius: 3px;
+            color: #333;
+            outline: none;            
+        }
+        .totais {
+            color: #333;
+            text-align: left;
+            margin: 10px 0;
+            
+        }
+        .totais span {
+            font-weight: bold;
+            color: green;
+            text-align: right;
+        }
+    </style>
+
+</head>
+<body>
+    <header>
+        <h1>Contador de Caracteres Online</h1>
+    </header>
+
+    <main>
+        <div class="container">
+            <textarea id="my-text" rows="8" placeholder="Digite ou cole seu texto aqui..."></textarea>
+            <div class="totais">Total de caracteres: <span id="count-total">0</span></div>
+            <div class="totais">Total de caracteres (sem espaços): <span id="count-nospace">0</span></div>
+            <div class="totais">Apenas letras e números (com espaços): <span id="count-letters">0</span></div>
+            <div class="totais">Apenas letras e números (sem espaços): <span id="count-lettersNoSpaces">0</span></div>
+            <div class="totais">Quantidade de palavras: <span id="count-words">0</span></div>
+        </div>
+
+        
+
+        <h4>Ferramenta simples e elegante! <br />
+            Achou útil? <a href="/index.html">Conheça mais!</a></h4>
+    </main>
+
+    <footer>Esta ferramenta foi desenvolvida por <a href="/index.html">MiniFerramentas</a>.</footer>
+
+    <!--Script-->
+    <script>
+        let myText = document.getElementById("my-text");
+        myText.addEventListener("input", () => {
+            let regex = /\s+/gi;
+            let totalCaracteres = myText.value.length;
+            document.querySelector("#count-total").innerHTML = totalCaracteres;
+            document.querySelector("#count-nospace").innerHTML = totalCaracteres - (myText.value.split(' ').length - 1);
+            document.querySelector("#count-letters").innerHTML = myText.value.replace(/[^a-zA-Z0-9 ]/g,'').length;
+            document.querySelector("#count-lettersNoSpaces").innerHTML = myText.value.replace(/[^a-zA-Z0-9]/g,'').length;
+            document.querySelector("#count-words").innerHTML = totalCaracteres > 0 ? myText.value.trim().replace(regex, ' ').split(' ').length : 0;             
+        });
+
+        
+    </script>
+</body>
+</html>
