@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MiniFerramentas - Tudo online e Grátis</title>
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Icons">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" />
     <link rel="stylesheet" href="style.css">
 
@@ -25,7 +26,7 @@
         }
         .busca input[type=text]{
             flex: 1;
-            height:40px;
+            height:50px;
             padding-left: 20px;
             border: 1px solid #ccc;
             border-radius: 10px 0 0 10px;
@@ -62,6 +63,10 @@
             text-align: left;
             padding: 10px;
             border-radius: 10px 10px 0 0;
+            display: flex;
+        }
+        .card h3 span {
+            margin-right: 8px;
         }
         .card p{
             margin: 10px 0;
@@ -127,7 +132,7 @@
                 <input type="text" name="txtBusca" placeholder="O que está precisando..." />
                 
                 <button type="submit" name="btnBuscar">
-                    <i class="fas fa-search fa-lg"></i>
+                    <span class="material-icons">search</span>
                 </button>
             </div>
 
@@ -142,53 +147,56 @@
     </main>
 
     <footer>Esta ferramenta foi desenvolvida por <a href="/index.html">MiniFerramentas</a>.</footer>
-
-    <script
-      src="https://kit.fontawesome.com/f9e19193d6.js"
-      crossorigin="anonymous"
-    ></script>
+    
     <script>
         let links = [
             {
                 nome: 'Pegar Miniaturas',
                 link: '/pegar-miniaturas-youtube/',
                 descricao: 'Com apenas o link, você pode pegar facilmente a miniatura (thumbnail) de qualquer vídeo do Youtube em diversas resoluções.',
+                icon: 'ondemand_video',
                 cor: 'red'
             },
             {
                 nome: 'Gerador de Senha',
                 link: '/gerador-senha/',
                 descricao: 'Use o gerador para criar facilmente uma senha entre 5 e 25 caracteres.',
+                icon: 'password',
                 cor: 'black'
             },
             {
                 nome: 'Lista de Tarefas',
                 link: '/lista-tarefas/',
                 descricao: 'Utilize para quando você precisar fazer uma lista de tarefas rápida.',
+                icon: 'task_alt',
                 cor: 'green'
             },
             {
                 nome: 'Contar Caracteres',
                 link: '/contador-caracteres/',
                 descricao: 'Escreva ou cole seu texto para o contador de caracteres mostrar a quantade de letras, palavras, espaços e outros.',
+                icon: 'text_fields',
                 cor: 'green'
             },
             {
                 nome: 'Sortear Número',
                 link: '/sortear-numero/',
                 descricao: 'Use para sortear um número entre o intervalo que preferir.',
+                icon: 'looks_two',
                 cor: 'black'
             },
             {
                 nome: 'Calculadora de Datas',
                 link: '/calculadora-datas/',
                 descricao: 'Esta calculadora de datas encontra a diferença de dias entre duas datas.',
+                icon: 'calendar_month',
                 cor: 'black'
             },
             {
                 nome: 'Calculadora de Combustível',
                 link: '/calculadora-combustivel/',
                 descricao: 'Gasolina ou Etanol? Calcule qual combustível está compensando mais colocar.',
+                icon: 'local_gas_station',
                 cor: 'black'
             },
         ];
@@ -225,7 +233,10 @@
                 document.querySelector('#cards').innerHTML +=
                     `
                     <a href="${list[i].link}" class="card">
-                        <h3 class="${list[i].cor}">${list[i].nome}</h3>
+                        <h3 class="${list[i].cor}">
+                            <span class="material-icons">${list[i].icon}</span>
+                            ${list[i].nome}
+                        </h3>
                         <p>${list[i].descricao}</p>
                     </a>
                     `
