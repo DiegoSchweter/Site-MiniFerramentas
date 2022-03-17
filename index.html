@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MiniFerramentas - Tudo online e Grátis</title>
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" />
     <link rel="stylesheet" href="style.css">
 
     <style>
@@ -88,6 +89,9 @@
             background-color: green;
             color: #fff;
         }
+        #qtdeFerramentas {
+            font-weight: bold;
+        }
 
 
         @media (min-width:600px) { /* tablets, retrato */ 
@@ -130,6 +134,9 @@
             <h2>Todas as MiniFerramentas</h2>
             <div id="cards"></div>
 
+            <div class="descricao" style="text-align: center;">
+                <p>Este site possui atualmente <span id="qtdeFerramentas">X</span> ferramentas online inteiramente grátis para serem utilizadas.</p>
+            </div>
         </div>
 
     </main>
@@ -161,10 +168,28 @@
                 cor: 'green'
             },
             {
-                nome: 'Contador de Caracteres',
+                nome: 'Contar Caracteres',
                 link: '/contador-caracteres/',
                 descricao: 'Escreva ou cole seu texto para o contador de caracteres mostrar a quantade de letras, palavras, espaços e outros.',
                 cor: 'green'
+            },
+            {
+                nome: 'Sortear Número',
+                link: '/sortear-numero/',
+                descricao: 'Use para sortear um número entre o intervalo que preferir.',
+                cor: 'black'
+            },
+            {
+                nome: 'Calculadora de Datas',
+                link: '/calculadora-datas/',
+                descricao: 'Esta calculadora de datas encontra a diferença de dias entre duas datas.',
+                cor: 'black'
+            },
+            {
+                nome: 'Calculadora de Combustível',
+                link: '/calculadora-combustivel/',
+                descricao: 'Gasolina ou Etanol? Calcule qual combustível está compensando mais colocar.',
+                cor: 'black'
             },
         ];
         loadCards(links);
@@ -205,6 +230,8 @@
                     </a>
                     `
             };
+
+            document.querySelector("#qtdeFerramentas").innerHTML = list.length;
         }
 
         

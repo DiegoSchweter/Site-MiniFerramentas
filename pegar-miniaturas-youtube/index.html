@@ -26,7 +26,7 @@
     
     <style type="text/css">
 		.container{
-			max-width: 960px;
+			max-width: 800px;
 			margin:10px auto;
 			padding:0 2%;
 			text-align: center;
@@ -36,7 +36,7 @@
 			margin:30px 0;
 		}
 
-		.container p{
+		.container > p{
 			font-size: 19px;
             margin-bottom: 20px;
 		}
@@ -101,6 +101,11 @@
 
             <div class="resultado"></div>
                         
+            <div class="descricao">
+                <p>Esta ferramenta tem o objetivo de ser utilizada para pegar a miniatura (thumbnail) de um vídeo do Youtube, para fins de salvar a imagem e divulgar em redes sociais, aplicativos de mensagens, marketing, etc.</p>
+                <p>A miniatura é o recurso responsável pelo primeiro contato do usuário com o vídeo. É a prévia do que o usuário irá assistir.</p>
+                <p>Sua utilização é bem simples, apenas abra o vídeo desajado e copie o seu link, cole no campo acima e clique no botão para ver a imagem em diversas resoluções e salve qual preferir.</p>
+            </div>
 
             <h4>Ferramenta simples e elegante! <br />
                 Achou útil? <a href="/index.html">Conheça mais!</a></h4>
@@ -108,10 +113,7 @@
         </div>
     </main>
     <footer>Esta ferramenta foi desenvolvida por <a href="/index.html">MiniFerramentas</a>.</footer>
-<<<<<<< HEAD
-=======
 
->>>>>>> a2ea1bebd51e412615e988f807ce4852ed6edf5b
     <script>
         document.querySelector('input[type=submit]').addEventListener('click',()=> {
             let url = document.querySelector('input[name=url]').value;

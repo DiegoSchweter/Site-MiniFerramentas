@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sorteie um Número - MiniFerramentas</title>
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" />    
+    <link rel="stylesheet" href="../style.css">
+    <style>
+      .container {
+        background-color: #ffffff;
+        width: 85%;
+        max-width: 550px;
+        margin: 50px auto;
+        padding: 3em;
+        border-radius: 0.5em;
+        box-shadow: 0 1.2em 2.8em rgba(0, 41, 22, 0.2);
+      }
+      .wrapper {
+        display: flex;
+        justify-content: space-between;
+        gap: 3em;
+      }
+      label {
+        font-size: 1.2em;
+        font-weight: 600;
+        color: #242e4c;
+      }
+      input {
+        display: block;
+        width: 100%;
+        font-size: 1.3em;
+        border: none;
+        color: #444b5f;
+        border-bottom: 1.5px solid #242e4c;
+        padding: 0.45em;
+        margin-top: 0.45em;
+        outline: none;
+      }
+      input:focus {
+        border-color: #333;
+      }
+      button#generate {
+        display: block;
+        width: 100%;
+        font-size: 1.1em;
+        margin: 2.7em 0 1.1em 0;
+        background-color: #333;
+        padding: 0.8em 0;
+        border: none;
+        border-radius: 0.5em;
+        cursor: pointer;
+        color: #ffffff;
+      }
+      #result {
+        text-align: center;
+        font-size: 3.7em;
+        font-size: 600;
+        color: #242e4c;
+      }
+    </style>
+  </head>
+  <body>    
+    <header>
+      <h1>Sorteie um Número</h1>
+    </header>
+
+    <main>
+      <div class="container">
+        <div class="wrapper">
+          <div class="input-wrapper">
+            <label for="min">Min:</label>
+            <input type="number" id="min" value="0" />
+          </div>
+          <div class="input-wrapper">
+            <label for="max">Max:</label>
+            <input type="number" id="max" value="10" />
+          </div>
+        </div>
+        <button id="generate">Sortear</button>
+        <div id="result"></div>
+      </div>
+
+      <div class="descricao">
+          <p>Escolha um número mínimo e um número máximo para o sorteio. Os extremos, mínimo e máximo, também estarão incluídos no sorteio.</p>
+      </div>
+
+      <h4>Ferramenta simples e elegante! <br />
+          Achou útil? <a href="/index.html">Conheça mais!</a></h4>
+    </main>
+
+    <footer>Esta ferramenta foi desenvolvida por <a href="/index.html">MiniFerramentas</a>.</footer>
+
+
+    <!-- Script -->
+    <script>
+      let generateBtn = document.querySelector("#generate");
+
+      function randomNum() {
+        let min = document.querySelector("#min");
+        let max = document.querySelector("#max");
+        let minValue = Number(min.value);
+        let maxValue = Number(max.value);
+        if (minValue > maxValue) {
+          minValue = maxValue + minValue;
+          maxValue = minValue - maxValue;
+          minValue = minValue - maxValue;
+          min.value = minValue;
+          max.value = maxValue;
+        }
+        let num = Math.floor(Math.random() * (maxValue - minValue + 1)) + minValue;
+        document.querySelector("#result").innerText = num;
+      }
+      window.addEventListener("load", randomNum());
+      generateBtn.addEventListener("click", randomNum);
+
+    </script>
+  </body>
+</html>

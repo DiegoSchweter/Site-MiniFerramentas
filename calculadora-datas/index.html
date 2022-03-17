@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculadora de datas - MiniFerramentas</title>    
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" />
+    <link rel="stylesheet" href="../style.css" />
+    <style>
+      main {
+        margin-top: 50px;
+      }
+      .container {
+        width: 90%;
+        max-width: 600px;
+        background-color: #242831;
+        padding: 100px 50px;
+        margin: 0 auto;
+        border-radius: 10px;
+      }
+      .inp-wrapper {
+        display: flex;
+        justify-content: space-around;
+        gap: 1.2em;
+      }
+      label {
+        color: #d5d5d5;
+        display: block;
+        font-weight: 600;
+      }
+      input[type="date"] {
+        font-size: 16px;
+        padding: 1em;
+        color: #242831;
+        border: none;
+        outline: none;
+        border-radius: 0.2em;
+        margin-top: 0.6em;
+      }
+      ::-webkit-calendar-picker-indicator {
+        background-color: #18f08b;
+        padding: 0.2em;
+        cursor: pointer;
+        border-radius: 0.1em;
+      }
+      button {
+        display: block;
+        background-color: #18f08b;
+        color: #16191e;
+        font-size: 18px;
+        margin: 1em auto 2em auto;
+        border: none;
+        padding: 0.7em 2em;
+        border-radius: 0.3em;
+        font-weight: 600;
+      }
+
+      #output {
+        background-color: rgba(255, 255, 255, 0.15);
+        text-align: center;
+        padding: 1em;
+        color: #ffffff;
+        font-size: 1.2em;
+        letter-spacing: 0.05em;
+      }
+      #output span {
+        color: #18f08b;
+        font-size: 1.4em;
+        font-weight: 600;
+      }
+      @media screen and (max-width: 550px) {
+        .container {
+          padding: 4em 2em;
+        }
+        .inp-wrapper {
+          flex-direction: column;
+        }
+        .date-wrapper {
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>  
+    <header>
+      <h1>Sorteie um Número</h1>
+    </header>
+
+    <main>
+      <div class="container">
+        <div class="inp-wrapper">
+          <div class="date-wrapper">
+            <label for="date-1">Data inicial</label>
+            <input type="date" id="date-1" />
+          </div>
+          <div class="date-wrapper">
+            <label for="date-2">Data Final</label>
+            <input type="date" id="date-2" />
+          </div>
+        </div>
+        <button id="submit">Calcular Dias</button>
+        <div id="output">Selecione as datas para começar</div>
+      </div>
+
+      <div class="descricao">
+          <p>Escolha a data inicial e a data final, depois clique no botão para calcular a diferença em dias entre as duas datas.</p>
+          <p>A diferença entre datas é o número corrido de dias que se passaram entre um período, e você pode usar a calculadora de dias para chegar a esse resultado de forma precisa.</p>
+          <p>O cálculo é realizado de forma que todos os dias, úteis e não-úteis, são contatos de forma contínua e ininterrupta no período.</p>
+      </div>
+
+      <h4>Ferramenta simples e elegante! <br />
+          Achou útil? <a href="/index.html">Conheça mais!</a></h4>
+    </main>
+
+    <footer>Esta ferramenta foi desenvolvida por <a href="/index.html">MiniFerramentas</a>.</footer>
+
+    <!-- Script -->
+    <script>
+      //Declaring and initializing variables
+      let submit = document.getElementById("submit");
+      let output = document.getElementById("output");
+
+      submit.addEventListener("click", () => {
+        //Create a Date object from input value
+        let date1 = new Date(document.getElementById("date-1").value);
+        let date2 = new Date(document.getElementById("date-2").value);
+
+        //Check if the input dates are valid
+        //If valid calculate the difference
+        if (date1.getTime() && date2.getTime()) {
+          //Calculate difference in time using getTime function
+          //getTime calculates number of years since January 1,1970
+          let timeDifference = date2.getTime() - date1.getTime();
+
+          //Since this value is in milliseconds we need to convert it into days
+          //We want the difference to be a non-negative number. Hence we use Math.abs()
+          let dayDifference = Math.abs(timeDifference / (1000 * 3600 * 24));
+          output.innerHTML = `A diferença entre as duas datas é de <span>${dayDifference}</span> dias`;
+        }
+
+        //Else display that the input is valid
+        else {
+          output.innerHTML = "Por favor, insira uma data válida";
+        }
+      });
+    </script>
+  </body>
+</html>
