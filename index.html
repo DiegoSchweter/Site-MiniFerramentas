@@ -1,10 +1,22 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+
+    <title>MiniFerramentas - Tudo online e Grátis</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MiniFerramentas - Tudo online e Grátis</title>
+
+    <meta name="author" content="MiniFerramentas.com.br">
+    <meta name="description" content="Use diversas ferramentas Online e Grátis - Site fácil de ser utilizado" />
+    <meta name="keywords" content="" />
+    <meta name="robots" content="index,follow">
+    <meta property="og:title" content="Ferramentas Online e Grátis">
+    <meta property="og:site_name" content="Ferramentas Online e Grátis">
+    <meta property="og:description" content="Ferramentas Online e Grátis - Site fácil de ser utilizado">
+    <meta property="og:url" content="https://miniferramentas.com.br/">
+    <meta property="og:image" content="">
+    <meta property="og:image:type" content="image/jpeg">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Icons">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" />
@@ -123,7 +135,11 @@
 </head>
 <body>
     <header>
-        <h1>MiniFerramentas - Online e Grátis</h1>
+        <h1>
+            <span class="material-icons">
+                apps
+            </span>
+            MiniFerramentas - Online e Grátis</h1>
     </header>
     
     <main>
@@ -139,8 +155,19 @@
             <h2>Todas as MiniFerramentas</h2>
             <div id="cards"></div>
 
-            <div class="descricao" style="text-align: center;">
-                <p>Este site possui atualmente <span id="qtdeFerramentas">X</span> ferramentas online inteiramente grátis para serem utilizadas.</p>
+            <div class="descricao w1110">
+                <div class="center">
+                    <p>Este site possui atualmente <span id="qtdeFerramentas">X</span> ferramentas online inteiramente grátis para serem utilizadas.</p>
+                </div>
+                
+                <br />
+                
+                <h2>O que são as ferramentas digitais?</h2>
+                <p>São os recursos digitais que possibilitam a utilização das tecnologias com o objetivo de facilitar a comunicação e o acesso à informação, através de dispositivos eletrônicos, como computadores, tablets e smartphones.</p>
+                <p>Alguns exemplos são: programas, aplicativos, plataformas virtuais, jogos, hardwares e softwares, portais e sites da internet, entre outros.</p>
+                <p>Podem ser utilizadas em diversas áreas para diferentes finalidades, como na administração, publicidade, saúde, ciências, educação e no uso pessoal ou corporativo.</p>
+                <p>Este site contém ferramentas online e gratuitas para uso rápido que facilite o que você precise em algum momento. Utilize o campo de busca para procurar a ferramenta certa para você 😉.</p>
+
             </div>
         </div>
 
@@ -153,7 +180,7 @@
             {
                 nome: 'Pegar Miniaturas',
                 link: '/pegar-miniaturas-youtube/',
-                descricao: 'Com apenas o link, você pode pegar facilmente a miniatura (thumbnail) de qualquer vídeo do Youtube em diversas resoluções.',
+                descricao: 'Com apenas o link, você pode pegar facilmente a miniatura (thumbnail) de qualquer vídeo do Youtube.',
                 icon: 'ondemand_video',
                 cor: 'red'
             },
@@ -174,7 +201,7 @@
             {
                 nome: 'Contar Caracteres',
                 link: '/contador-caracteres/',
-                descricao: 'Escreva ou cole seu texto para o contador de caracteres mostrar a quantade de letras, palavras, espaços e outros.',
+                descricao: 'Escreva ou cole seu texto para o contador de caracteres mostrar a quantade de letras, palavras e espaços.',
                 icon: 'text_fields',
                 cor: 'green'
             },
@@ -195,15 +222,22 @@
             {
                 nome: 'Calculadora de Combustível',
                 link: '/calculadora-combustivel/',
-                descricao: 'Gasolina ou Etanol? Calcule qual combustível está compensando mais colocar.',
+                descricao: 'Gasolina ou Etanol? Calcule qual combustível compensa.',
                 icon: 'local_gas_station',
                 cor: 'black'
             },
             {
                 nome: 'Loteria',
                 link: '/sortear-numeros-loteria/',
-                descricao: 'use para sortear núemros da sorte da loteria federal.',
+                descricao: 'Use para sortear núemros da sorte da loteria federal.',
                 icon: 'paid',
+                cor: 'black'
+            },
+            {
+                nome: 'Conversor de moedas',
+                link: '/conversor-moedas/',
+                descricao: 'Faça conversão de dolar, euro, e outras moedas para o real brasileiro.',
+                icon: 'attach_money',
                 cor: 'black'
             },
         ];
