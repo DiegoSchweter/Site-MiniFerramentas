@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conversor de Moedas - MiniFerramentas</title>
+    
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" />    
+    <link rel="stylesheet" href="../style.css">
+    <style>
+      .container {
+        background-color: #ffffff;
+        width: 85%;
+        max-width: 550px;
+        margin: 50px auto;
+        padding: 3em;
+        border-radius: 0.5em;
+        box-shadow: 0 1.2em 2.8em rgba(0, 41, 22, 0.2);
+      }
+      .wrapper {
+        display: flex;
+        justify-content: space-between;
+        gap: 3em;
+        margin-top: 30px;
+      }
+      label {
+        font-size: 18px;
+        font-weight: bold;
+        color: #242e4c;
+      }
+      input {
+        display: block;
+        width: 50%;
+        font-size: 20px;
+        border: none;
+        color: #444b5f;
+        border-bottom: 1.5px solid #242e4c;
+        padding: 10px;
+        margin-top: 10px;
+        outline: none;
+      }
+      input:focus {
+        border-color: #333;
+      }
+      select {
+        display: block;
+        width: 50%;
+        font-size: 16px;
+        border: none;
+        border-bottom: 1.5px solid #242e4c;
+        outline: none;
+
+      }
+      button {
+        display: block;
+        width: 100%;
+        font-size: 18px;
+        margin: 38px 0 18px 0;
+        background-color: #333;
+        padding: 14px 0;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        color: #ffffff;
+      }
+      .result {
+        text-align: center;
+        font-size: 30px;
+        color: #242e4c;
+      }
+    </style>
+  </head>
+  <body>    
+    <header>
+      <h1>Conversor de Moedas</h1>
+    </header>
+
+    <main>
+      <div class="container">
+        <label for="entrada">Converter em reais:</label>
+
+        <div class="wrapper">
+            <input id="entrada" type="number">   
+            
+            <select id="moedas">
+                  <option value='NULL'>Selecione</option>
+                  <option value='EUR'>Euro</option>
+                  <option value='USD'>Dólar</option>
+                  <!--<option value='USDT'>Dólar turismo</option>-->
+                  <option value='CAD'>Dólar canadense</option>
+                  <option value='AUD'>Dólar australiano</option>
+                  <option value='GBP'>Libra Esterlina</option>
+                  <option value='ARS'>Peso argentino</option>
+                  <option value='JPY'>Iene Japonês</option>
+                  <option value='CNY'>Yuan Chinês</option>
+                  <option value='CHF'>Franco Suíço</option>
+                  <option value='ILS'>Novo Shekel Israelense</option>
+                  <option value='BTC'>Bitcoin</option>
+                  <option value='ETH'>Ethereum</option>
+                  <option value='LTC'>Litecoin</option>
+                  <option value='DOGE'>Dogecoin</option>
+                  <option value='XRP'>XRP</option>
+            </select>  
+          </div>
+
+          <button id="btnConverter">Calcular</button>
+          <h3 id="saida"></h3> 
+          <span id="atualizacao"></span>
+      </div>
+
+      <div class="descricao">
+          <p>Faça a conversão rápida das principais moedas do mundo em reais. Digite o valor no campo e selecione uma moeda, clique no botão para ver o resultado do valor em Real Brasileiro.</p>
+      </div>
+
+      <h4>Ferramenta simples e elegante! <br />
+          Achou útil? <a href="/index.html">Conheça mais!</a></h4>
+    </main>
+
+    <footer>Esta ferramenta foi desenvolvida por <a href="/index.html">MiniFerramentas</a>.</footer>
+
+
+    <!-- Script -->
+    <script>
+      var resultado;
+
+      $.ajax({
+        type: "GET",
+        dataType: "JSON",
+        url: "https://economia.awesomeapi.com.br/json/all",
+        success: function (data) {
+          resultado = data
+        },
+        error: function (data) {
+          document.querySelector("#atualizacao").innerHTML = 'Erro! o site não conseguiu carregar os valores atuais da cotação. Tente novamente mais tarde. :(';
+        }
+      });
+
+      document.querySelector("#btnConverter").addEventListener("click", converter);
+
+      function converter() {
+        var euro = resultado["EUR"]["bid"]
+        var dolar = resultado["USD"]["bid"]
+        var dolarTurismo = resultado["USDT"]["bid"]
+        var dolarCanadense = resultado["CAD"]["bid"]
+        var dolarAustraliano = resultado["AUD"]["bid"]
+        var libra = resultado["GBP"]["bid"]
+        var peso = resultado["ARS"]["bid"]
+        var iene = resultado["JPY"]["bid"]
+        var yuan = resultado["CNY"]["bid"]
+        var franco = resultado["CHF"]["bid"]
+        var shekel = resultado["ILS"]["bid"]
+        var btcoin = resultado["BTC"]["bid"]
+        var ethereum = resultado["ETH"]["bid"]
+        var ltcoin = resultado["LTC"]["bid"]
+        var dogecoin = resultado["DOGE"]["bid"]
+        var xrp = resultado["XRP"]["bid"]
+
+        function getHorarioAtualizacao(codigoMoeda) {
+          var data = (resultado[codigoMoeda]["create_date"])
+          //Mudando a formatação da data para DD/MM/AA 
+          var dia = data.substring(8, 10)
+          var mes = data.substring(5, 7)
+          var ano = data.substring(0, 4)
+          var hora = data.substring(11, 16)
+          var dataFormatada = `${dia}/${mes}/${ano} às ${hora}`
+          var atualizacao = document.querySelector("#atualizacao");
+          atualizacao.innerHTML = 'Cotação atualizada em ' + dataFormatada;
+        }
+
+        var numeroDigitado = document.querySelector("#entrada").value;
+        numeroDigitado = parseFloat(numeroDigitado);
+
+        var calculo;
+
+        var saida = document.querySelector("#saida");
+        var selecionado = document.querySelector("#moedas").value;
+
+        function calcular(valorMoeda, codigoMoeda){
+          calculo = numeroDigitado * valorMoeda
+          numeroDigitado = numeroDigitado.toLocaleString('en-us', { style: 'currency', currency: codigoMoeda });
+          calculo = calculo.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
+          saida.innerHTML = `Resultado: ${numeroDigitado} = ${calculo}`
+          getHorarioAtualizacao(codigoMoeda)
+        }
+
+        if (isNaN(numeroDigitado) == true && selecionado == "NULL") {
+          atualizacao.innerHTML = "Digite um valor e escolha uma moeda!";
+        } else {
+          if (isNaN(numeroDigitado) == true) {
+            atualizacao.innerHTML = "Digite um valor!";
+          }
+          if (selecionado == "NULL") {
+            atualizacao.innerHTML = "Escolha uma moeda!";
+          }
+        }
+
+        if (numeroDigitado <= 0) {
+          alert("Valor inválido! Digite somente valores positivos e diferentes de zero")
+        }
+
+        if (selecionado == "EUR" && !isNaN(numeroDigitado) && !isNaN(euro)) {
+            calcular(euro, "EUR")
+        }
+
+        if (selecionado == "USD" && !isNaN(numeroDigitado) && !isNaN(dolar)) {
+            calcular(dolar, "USD")
+        }
+
+        if (selecionado == "USDT" && !isNaN(numeroDigitado) && !isNaN(dolarTurismo)) {
+          calcular(euro, "USDT")
+        }
+
+        if (selecionado == "CAD" && !isNaN(numeroDigitado) && !isNaN(dolarCanadense)) {
+            calcular(dolarCanadense, "CAD")        
+        }
+
+        if (selecionado == "AUD" && !isNaN(numeroDigitado) && !isNaN(dolarAustraliano)) {
+            calcular(dolarAustraliano, "AUD")
+        }
+
+        if (selecionado == "GBP" && !isNaN(numeroDigitado) && !isNaN(libra)) {
+            calcular(libra, "GBP")
+        }
+
+        if (selecionado == "ARS" && !isNaN(numeroDigitado) && !isNaN(peso)) {
+            calcular(peso, "ARS")
+        }
+
+        if (selecionado == "JPY" && !isNaN(numeroDigitado) && !isNaN(iene)) {
+            calcular(iene, "JPY")
+        }
+
+        if (selecionado == "CNY" && !isNaN(numeroDigitado) && !isNaN(yuan)) {
+            calcular(yuan, "CNY")
+        }
+
+        if (selecionado == "CHF" && !isNaN(numeroDigitado) && !isNaN(franco)) {
+            calcular(franco, "CHF")
+        }
+
+        if (selecionado == "ILS" && !isNaN(numeroDigitado) && !isNaN(shekel)) {
+            calcular(shekel, "ILS")
+        }
+
+        if (selecionado == "BTC" && !isNaN(numeroDigitado) && !isNaN(btcoin)) {
+            btcoin = btcoin * 1000
+            calcular(btcoin, "BTC")
+        }
+
+        if (selecionado == "ETH" && !isNaN(numeroDigitado) && !isNaN(ethereum)) {
+            calcular(ethereum, "ETH")
+        }
+
+        if (selecionado == "LTC" && !isNaN(numeroDigitado) && !isNaN(ltcoin)) {
+            calcular(ltcoin, "LTC")
+        }
+
+        if (selecionado == "DOGE" && !isNaN(numeroDigitado) && !isNaN(dogecoin)) {
+            calcular(dogecoin, "XDG")
+        }
+
+        if (selecionado == "XRP" && !isNaN(numeroDigitado) && !isNaN(xrp)) {
+            calcular(xrp, "XRP")
+        }
+
+      }
+    </script>
+  </body>
+</html>
