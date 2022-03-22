@@ -58,7 +58,7 @@
             text-align: left;
             margin-top: 20px;
         }
-        #cards {
+        .cards {
             display: flex;   
             flex-wrap: wrap;
             width: 100%;
@@ -104,6 +104,10 @@
         }
         .green  {
             background-color: green;
+            color: #fff;
+        }
+        .blue {
+            background-color: #249fe6;
             color: #fff;
         }
         #qtdeFerramentas {
@@ -153,7 +157,18 @@
             </div>
 
             <h2>Todas as MiniFerramentas</h2>
-            <div id="cards"></div>
+            <div id="cards" class="cards"></div>
+            
+            <h2>MiniFerramentas para Youtube</h2>
+            <div id="cardsYoutube" class="cards"></div>
+
+            <h2>MiniFerramentas para Utilidades Diárias</h2>
+            <div id="cardsUtilidades" class="cards"></div>
+
+            <h2>MiniFerramentas para Sortear</h2>
+            <div id="cardsSorteadores" class="cards"></div>
+
+
 
             <div class="descricao w1110">
                 <div class="center">
@@ -224,7 +239,7 @@
                 link: '/calculadora-combustivel/',
                 descricao: 'Gasolina ou Etanol? Calcule qual combustível compensa.',
                 icon: 'local_gas_station',
-                cor: 'black'
+                cor: 'blue'
             },
             {
                 nome: 'Loteria',
@@ -238,10 +253,11 @@
                 link: '/conversor-moedas/',
                 descricao: 'Faça conversão de dolar, euro, e outras moedas para o real brasileiro.',
                 icon: 'attach_money',
-                cor: 'black'
+                cor: 'green'
             },
         ];
-        loadCards(links);
+        loadCards(links, '#cards');
+        cardsSection();
         
         document.querySelector('input[name=txtBusca]').addEventListener('input',()=> {
             busca();
@@ -261,17 +277,31 @@
                     return item.descricao.toLowerCase().includes(busca);
                 });
                 
-                loadCards(linksFilter);
+                loadCards(linksFilter, '#cards');
             }
             else
-                loadCards(links);
+                loadCards(links, '#cards');
         }
 
-        function loadCards(list) {
-            document.querySelector('#cards').innerHTML = "";
+        function cardsSection() {
+            let linksSection = "";
+            section('red', '#cardsYoutube');
+            section('blue', '#cardsUtilidades');
+            section('black', '#cardsSorteadores');
+
+            function section(cor, divSection) {
+                linksFilter = links.filter((item) => {
+                    return item.cor.toLowerCase().includes(cor);
+                });                    
+                loadCards(linksFilter, divSection);
+            }
+        }
+
+        function loadCards(list, div) {
+            document.querySelector(div).innerHTML = "";
 
             for (let i = 0; i <= list.length - 1; i++) {
-                document.querySelector('#cards').innerHTML +=
+                document.querySelector(div).innerHTML +=
                     `
                     <a href="${list[i].link}" class="card">
                         <h3 class="${list[i].cor}">
@@ -283,7 +313,8 @@
                     `
             };
 
-            document.querySelector("#qtdeFerramentas").innerHTML = list.length;
+            if (div === '#cards')
+                document.querySelector("#qtdeFerramentas").innerHTML = list.length;
         }
 
         
