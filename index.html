@@ -94,6 +94,35 @@
         .card:hover h3 {
             background-color: #2980B9;
         }
+        .items {
+            display: flex;   
+            flex-wrap: wrap;
+            width: 100%;
+            position: relative;
+        }
+        .item {
+            border: 1px solid #ccc;
+            background-color: #e0e0e0;
+            width: 100%;
+            height: auto;
+            margin: 10px 1% 1px 3%;
+        }
+        .item h3 {
+            text-align: left;
+            padding: 10px;
+            display: flex;
+        }
+        .item h3 span {
+            margin-right: 8px;
+        }
+        .item:hover  {
+            background-color: #2980B9;
+            opacity: 0.6;
+            color: #fff;
+        }
+        /*.item:hover h3 {
+            background-color: #2980B9;
+        }*/
         .red {
             background-color: red;
             color: #fff;
@@ -110,6 +139,10 @@
             background-color: #249fe6;
             color: #fff;
         }
+        .orange {
+            background-color: #ec5d10;
+            color: #fff;
+        }
         #qtdeFerramentas {
             font-weight: bold;
         }
@@ -120,17 +153,30 @@
                 width: 48%;
                 margin: 10px 1%;
             }
+            .item {
+                width: 47%;
+                margin: 10px 1% 1px 2%;
+            }
         }
         @media (min-width:801px) { /* tablets, paisagem */ 
             .card {
                 width: 31%;
                 margin: 10px 1%;
             }
+            .item {
+                width: 30%;
+                margin: 10px 1% 1px 2%;
+            }
         }
         @media (min-width:1025px) { /* laptops and desktops */ 
             .card {
                 width: 23%;
                 margin: 10px 1%;
+            }
+            .item {
+                width: 22%;
+                margin: 10px 1% 1px 1%;
+                
             }
         }
     </style>
@@ -159,14 +205,20 @@
             <h2>Todas as MiniFerramentas</h2>
             <div id="cards" class="cards"></div>
             
-            <h2>MiniFerramentas para Youtube</h2>
-            <div id="cardsYoutube" class="cards"></div>
+            <h2>Youtube</h2>
+            <div id="cardsYoutube" class="items"></div>
 
-            <h2>MiniFerramentas para Utilidades Diárias</h2>
-            <div id="cardsUtilidades" class="cards"></div>
+            <h2>Utilidades Diárias</h2>
+            <div id="cardsUtilidades" class="items"></div>
 
-            <h2>MiniFerramentas para Sortear</h2>
-            <div id="cardsSorteadores" class="cards"></div>
+            <h2>Textos</h2>
+            <div id="cardsTextos" class="items"></div>
+
+            <h2>Financeiro</h2>
+            <div id="cardsFinanceiros" class="items"></div>
+
+            <h2>Calcular e Sortear</h2>
+            <div id="cardsSorteadores" class="items"></div>
 
 
 
@@ -211,14 +263,14 @@
                 link: '/lista-tarefas/',
                 descricao: 'Utilize para quando você precisar fazer uma lista de tarefas rápida.',
                 icon: 'task_alt',
-                cor: 'green'
+                cor: 'blue'
             },
             {
                 nome: 'Contar Caracteres',
                 link: '/contador-caracteres/',
                 descricao: 'Escreva ou cole seu texto para o contador de caracteres mostrar a quantade de letras, palavras e espaços.',
                 icon: 'text_fields',
-                cor: 'green'
+                cor: 'orange'
             },
             {
                 nome: 'Sortear Número',
@@ -256,7 +308,7 @@
                 cor: 'green'
             },
         ];
-        loadCards(links, '#cards');
+        loadCards(links, '#cards', 'card');
         cardsSection();
         
         document.querySelector('input[name=txtBusca]').addEventListener('input',()=> {
@@ -277,40 +329,62 @@
                     return item.descricao.toLowerCase().includes(busca);
                 });
                 
-                loadCards(linksFilter, '#cards');
+                loadCards(linksFilter, '#cards', 'card');
             }
             else
-                loadCards(links, '#cards');
+                loadCards(links, '#cards', 'card');
         }
 
         function cardsSection() {
             let linksSection = "";
             section('red', '#cardsYoutube');
             section('blue', '#cardsUtilidades');
+            section('orange', '#cardsTextos');
+            section('green', '#cardsFinanceiros');
             section('black', '#cardsSorteadores');
 
             function section(cor, divSection) {
                 linksFilter = links.filter((item) => {
                     return item.cor.toLowerCase().includes(cor);
                 });                    
-                loadCards(linksFilter, divSection);
+                loadCards(linksFilter, divSection, 'item');
             }
         }
 
-        function loadCards(list, div) {
+        function loadCards(list, div, type) {
             document.querySelector(div).innerHTML = "";
 
             for (let i = 0; i <= list.length - 1; i++) {
-                document.querySelector(div).innerHTML +=
-                    `
-                    <a href="${list[i].link}" class="card">
-                        <h3 class="${list[i].cor}">
-                            <span class="material-icons">${list[i].icon}</span>
-                            ${list[i].nome}
-                        </h3>
-                        <p>${list[i].descricao}</p>
-                    </a>
-                    `
+                if (type == 'card') {
+                    document.querySelector(div).innerHTML +=
+                        `
+                        <a href="${list[i].link}" class="card">
+                            <h3 class="${list[i].cor}">
+                                <span class="material-icons">${list[i].icon}</span>
+                                ${list[i].nome}
+                            </h3>
+                            <p>${list[i].descricao}</p>
+                        </a>
+                        `
+                }
+                else if (type == 'item') {
+                    if (i == 0) {
+                        document.querySelector(div).innerHTML +=
+                        `
+                        <div class="${list[i].cor}" style=" width:10px; margin-top: -1px; height:100%; position:absolute;"></div>
+                        `
+                    }
+
+                    document.querySelector(div).innerHTML +=
+                        `
+                        <a href="${list[i].link}" class="item">
+                            <h3>
+                                <span class="material-icons">${list[i].icon}</span>
+                                ${list[i].nome}
+                            </h3>
+                        </a>
+                        `
+                }
             };
 
             if (div === '#cards')
