@@ -143,6 +143,10 @@
             background-color: #ec5d10;
             color: #fff;
         }
+        .gray {
+            background-color: #4e6369;
+            color: #fff;
+        }
         #qtdeFerramentas {
             font-weight: bold;
         }
@@ -217,6 +221,9 @@
             <h2>Financeiro</h2>
             <div id="cardsFinanceiros" class="items"></div>
 
+            <h2>Informações</h2>
+            <div id="cardsInformacoes" class="items"></div>
+
             <h2>Calcular e Sortear</h2>
             <div id="cardsSorteadores" class="items"></div>
 
@@ -224,7 +231,7 @@
 
             <div class="descricao w1110">
                 <div class="center">
-                    <p>Este site possui atualmente <span id="qtdeFerramentas">X</span> ferramentas online inteiramente grátis para serem utilizadas.</p>
+                    <p>Este site possui <span id="qtdeFerramentas">X</span> ferramentas online inteiramente grátis para serem utilizadas.</p>
                 </div>
                 
                 <br />
@@ -307,6 +314,13 @@
                 icon: 'attach_money',
                 cor: 'green'
             },
+            {
+                nome: 'Guia de Países',
+                link: '/paises/',
+                descricao: 'Informações como população, idioma, moeda, bandeira e mais.',
+                icon: 'tour',
+                cor: 'gray'
+            },
         ];
         loadCards(links, '#cards', 'card');
         cardsSection();
@@ -341,6 +355,7 @@
             section('blue', '#cardsUtilidades');
             section('orange', '#cardsTextos');
             section('green', '#cardsFinanceiros');
+            section('gray', '#cardsInformacoes');
             section('black', '#cardsSorteadores');
 
             function section(cor, divSection) {

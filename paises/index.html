@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <title>Guia de Países - MiniFerramentas</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <meta name="author" content="MiniFerramentas.com.br">
+    <meta name="description" content="Guia de Países - Site fácil de ser utilizado" />
+    <meta name="keywords" content="guia de países, países, país, bandeira" />
+    <meta name="robots" content="index,follow">
+    <meta property="og:title" content="Guia de Países">
+    <meta property="og:site_name" content="Guia de Países">
+    <meta property="og:description" content="Guia de Países - Site fácil de ser utilizado">
+    <meta property="og:url" content="https://miniferramentas.com.br/paises">
+    <meta property="og:image" content="">
+    <meta property="og:image:type" content="image/jpeg">
+
+      <link rel="stylesheet" href="../style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap">
+
+    <style>
+      main {
+        margin-top: 50px;
+      }
+      .container {
+        background-color: #ffffff;
+        width: 90%;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 48px 40px;
+        border-radius: 10px;
+        box-shadow: 0 18px 28px rgba(8, 21, 65, 0.25);
+      }
+      label {
+        font-size: 18px;
+        font-weight: bold;
+        color: #242e4c;
+      }
+      .search-wrapper {
+        display: flex;
+        justify-content: space-around;
+        padding: 10px;
+        margin-top: 10px;
+        gap: 20px;
+      }
+      .search-wrapper input {
+        width: 100%;
+        font-size: 16px;
+        padding: 0 14px;
+        border: none;
+        border-bottom: 2px solid #2980B9;
+        outline: none;
+        color: #222a43;
+      }
+      .search-wrapper button {
+        font-size: 16px;
+        background-color: #2980B9;
+        color: #ffffff;
+        padding: 14px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+      #result {
+        margin-top: 20px;
+      }
+      .container .flag-img {
+        display: block;
+        width: 45%;
+        min-width: 120px;
+        margin: 30px auto 18px auto;
+      }
+      .container h2 {
+        font-weight: 600;
+        color: #222a43;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 30px;
+      }
+      .data-wrapper {
+        margin-bottom: 16px;
+        letter-spacing: 0.3px;
+        text-align: left;
+      }
+      .container h4 {
+        display: inline;
+        font-weight: 500;
+        color: #222a43;
+      }
+      .container span {
+        color: #5d6274;
+      }
+      .container h3 {
+        text-align: center;
+        font-size: 1.2em;
+        font-weight: 400;
+        color: #ff465a;
+      }
+
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Guia de Países</h1>
+  </header>
+  <main>
+    <div class="container">
+      <label for="txtPais">Digite o nome do País em inglês:</label>
+      
+      <div class="search-wrapper">
+        <input type="text" id="txtPais" placeholder="Nome do País..." />
+        <button id="search-btn">Buscar</button>
+      </div>
+      
+      <div id="result"></div>
+    </div>
+
+    <h4>Ferramenta simples e elegante! <br />
+      Achou útil? <a href="/index.html">Conheça mais!</a></h4>
+  </main>
+  <footer>Esta ferramenta foi desenvolvida por <a href="/index.html">MiniFerramentas</a>.</footer>
+    <!-- Script -->
+    <script>
+      let searchBtn = document.querySelector("#search-btn");
+      let countryInp = document.querySelector("#txtPais");
+      searchBtn.addEventListener("click", () => {
+        let countryName = countryInp.value;
+        let finalURL = `https://restcountries.com/v3.1/name/${countryName}?fullText=true`;
+        //console.log(finalURL);
+        fetch(finalURL)
+          .then((response) => response.json())
+          .then((data) => {
+            //   console.log(data[0]);
+            //   console.log(data[0].capital[0]);
+            //   console.log(data[0].flags.svg);
+            //   console.log(data[0].name.common);
+            //   console.log(data[0].continents[0]);
+            //   console.log(Object.keys(data[0].currencies)[0]);
+            //   console.log(data[0].currencies[Object.keys(data[0].currencies)].name);
+            //   console.log(
+            //     Object.values(data[0].languages).toString().split(",").join(", ")
+            //   );
+            result.innerHTML = `
+              <img src="${data[0].flags.svg}" class="flag-img">
+              <h2>${data[0].name.common}</h2>
+              <div class="wrapper">
+                  <div class="data-wrapper">
+                      <h4>Capital:</h4>
+                      <span>${data[0].capital[0]}</span>
+                  </div>
+              </div>
+              <div class="wrapper">
+                  <div class="data-wrapper">
+                      <h4>Continente:</h4>
+                      <span>${data[0].continents[0]}</span>
+                  </div>
+              </div>
+              <div class="wrapper">
+                  <div class="data-wrapper">
+                      <h4>População:</h4>
+                      <span>${(data[0].population).toLocaleString('pt-BR')}</span>
+                  </div>
+              </div>
+              <div class="wrapper">
+                  <div class="data-wrapper">
+                      <h4>Moeda:</h4>
+                      <span>${
+                        data[0].currencies[Object.keys(data[0].currencies)].name
+                      } - ${Object.keys(data[0].currencies)[0]}</span>
+                  </div>
+              </div>
+              <div class="wrapper">
+                  <div class="data-wrapper">
+                      <h4>Divisa:</h4>
+                      <span>${Object.values(data[0].borders)
+                        .toString()
+                        .split(",")
+                        .join(", ")}</span>
+                  </div>
+              </div>
+              <div class="wrapper">
+                  <div class="data-wrapper">
+                      <h4>Idiomas:</h4>
+                      <span>${Object.values(data[0].languages)
+                        .toString()
+                        .split(",")
+                        .join(", ")}</span>
+                  </div>
+              </div>
+              <div class="wrapper">
+                  <div class="data-wrapper">
+                      <h4>Fuso Horários:</h4>
+                      <span>${Object.values(data[0].timezones)
+                        .toString()
+                        .split(",")
+                        .join(", ")}</span>
+                  </div>
+              </div>
+              <div class="wrapper">
+                  <div class="data-wrapper">
+                      <h4>Mapa:</h4>
+                      <span><a href="${data[0].maps.googleMaps}" target="_blank">Google Maps</a></span>
+                  </div>
+              </div>
+            `;
+          })
+          .catch(() => {
+            if (countryName.length == 0) {
+              result.innerHTML = `<h3>Digite o nome de um país</h3>`;
+            } else {
+              result.innerHTML = `<h3>Nome de país inválido.</h3>`;
+            }
+          });
+      });
+    </script>
+  </body>
+</html>
