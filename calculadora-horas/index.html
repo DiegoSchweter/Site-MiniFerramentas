@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    
+    <title>Calculadora de Horas - MiniFerramentas</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="author" content="MiniFerramentas.com.br">
+    <meta name="description" content="Calculadora de Combustível - Site fácil de ser utilizado" />
+    <meta name="keywords" content="calculadora de combustivel, calcular combustivel, preco gasolina, preco etanol" />
+    <meta name="robots" content="index,follow">
+    <meta property="og:title" content="Calculadora de Combustível">
+    <meta property="og:site_name" content="Calculadora de Combustível">
+    <meta property="og:description" content="Calculadora de Combustível - Site fácil de ser utilizado">
+    <meta property="og:url" content="https://miniferramentas.com.br/calculadora-combustivel">
+    <meta property="og:image" content="">
+    <meta property="og:image:type" content="image/jpeg">
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" />    
+    <link rel="stylesheet" href="../style.css">
+    <style>
+      .container {
+        background-color: #ffffff;
+        width: 85%;
+        max-width: 550px;
+        margin: 50px auto;
+        padding: 3em;
+        border-radius: 0.5em;
+        box-shadow: 0 1.2em 2.8em rgba(0, 41, 22, 0.2);
+      }
+      .wrapper {
+        display: flex;
+        justify-content: center;
+        gap: 3em;
+        margin-top: 20px;
+      }
+      .wrapper.two {
+        display: flex;
+        justify-content: center;
+        gap: 3em;
+      }
+      label {
+        font-size: 1.2em;
+        font-weight: 600;
+        color: #242e4c;
+      }
+      input {
+        display: block;
+        width: 100%;
+        font-size: 18px;
+        border: none;
+        color: #444b5f;
+        border-bottom: 1.5px solid #242e4c;
+        padding: 0.45em;
+        margin-top: 0.45em;
+        outline: none;
+      }
+      input:focus {
+        border-color: #333;
+      }
+      button#generate, button#diffGenerate {
+        display: block;
+        width: 100%;
+        margin-top: 40px;
+        font-size: 20px;
+      }
+      button#diffGenerate {
+        margin-bottom: 40px;
+      }
+      button#erase, button#clear {
+        width: 49%;
+        margin: 5px 0 40px 0;
+        font-size: 15px;
+      }
+      button {
+        padding: 14px 0;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        background-color: #333;
+        color: #ffffff;
+      }
+      #result {
+        text-align: center;
+        font-size: 20px;
+        color: #242e4c;
+      }
+      #totalResult, #diffResult {
+        font-size: 24px;
+      }
+
+    </style>
+  </head>
+  <body>    
+    <header>
+      <h1>Calculadora de Horas</h1>
+    </header>
+
+    <main>
+      <div class="container">
+          <h2>Diferença de horas</h2>
+          <div class="wrapper two">
+            <div class="input-wrapper">
+              <label for="time1">Horário 1:</label>
+              <input type="time" id="time1"/>
+            </div>
+            <div class="input-wrapper">
+              <label for="time2">Horário 2:</label>
+              <input type="time" id="time2"/>
+            </div>
+          </div>
+
+          <button id="diffGenerate">Calcular</button>
+
+          <div id="diffResult"></div>
+      </div>
+
+      <div class="container">
+          <h2>Somar horas</h2>
+          <div class="wrapper">
+            <div class="input-wrapper">
+              <label for="time">Horário:</label>
+              <input type="time" id="time"/>
+            </div>
+          </div>
+
+          <button id="generate">Somar</button>
+          <button id="erase">Apagar Último</button>
+          <button id="clear">Limpar Tudo</button>
+
+          <div id="result"></div>
+          <div id="totalResult"></div>
+      </div>
+
+      <div class="descricao">
+          <p>Insira a quantidade de horas e minutos, depois clique no botão para Somar para ir adicionando ao resultado.</p>
+          <p>Esta ferramenta pode ser usada para cálculo de banco de horas, desconto de horas e minutos.</p>
+      </div>
+
+      <h4>Ferramenta simples e elegante! <br />
+          Achou útil? <a href="/index.html">Conheça mais!</a></h4>
+    </main>
+
+    <footer>Esta ferramenta foi desenvolvida por <a href="/index.html">MiniFerramentas</a>.</footer>
+
+
+    <!-- Script -->
+    <script>
+      //Diferença de horas
+      {
+        let input1 = document.querySelector("#time1");
+        let input2 = document.querySelector("#time2");
+        let calculateBtn = document.querySelector("#diffGenerate");
+        let result = document.querySelector("#diffResult");
+
+        calculateBtn.addEventListener("click", () => {
+          if (input1.value.length > 0 && input2.value.length > 0) {
+            let durations = [];
+            
+            if (input1.value <= input2.value) {
+              durations.push(input1.value);
+              durations.push(input2.value);
+                          
+              let ms  = durations.map(d => moment.duration(d).asSeconds() * 1000);             
+              let diff = ms.reduce((prev, cur) => cur - prev, 0);
+              let total = moment.utc(diff).add(-input2.value, "hours").format("HH:mm");
+
+              result.innerHTML = total;
+            }
+            else {
+              durations.push(input2.value);
+              durations.push(input1.value);
+                          
+              let ms  = durations.map(d => moment.duration(d).asSeconds() * 1000);             
+              let diff = ms.reduce((prev, cur) => cur - prev, 0);
+              let total = moment.utc(diff).add(-input2.value, "hours").format("HH:mm");
+
+              result.innerHTML = "-" + total;
+            }
+            
+          }
+        });
+      }
+
+      //Somar horas
+      {
+        let input = document.querySelector("#time");
+        let generateBtn = document.querySelector("#generate");
+        let eraseBtn = document.querySelector("#erase");
+        let clearBtn = document.querySelector("#clear");
+        let result = document.querySelector("#result");
+        let totalResult = document.querySelector("#totalResult");
+        
+        let durations = [];
+
+        function somar() {
+          let time = input.value;
+          
+          if (time.length > 0)
+          {
+            durations.push(time); //adicionar horário no array
+            calculo();
+          }
+          input.focus();
+          
+        }
+
+        function calculo () {
+          result.innerHTML = "";
+          totalResult.innerHTML = "";
+
+          let sum = moment.duration();
+          for(let i = 0; i < durations.length; i++){
+              result.innerHTML += durations[i] + "<br />";
+              sum.add(moment.duration(durations[i]));
+          }
+
+          let total = moment.duration(sum);
+
+          let horas = Math.floor(moment.duration(total).asHours()) || "00";
+          let minutos = moment.duration(total).minutes();
+
+          if (horas.toString().length < 2) 
+            horas = "0" + horas;
+          
+          if (minutos.toString().length < 2) 
+            minutos = "0" + minutos;
+
+          total = horas + ":" + minutos;
+
+          console.log(horas.toString().length);
+
+/*
+          let ms  = durations.map(d => moment.duration(d).asSeconds() * 1000); 
+          let sum = ms.reduce((prev, cur) => prev + cur, 0);
+
+          let total = moment.utc(sum).format("HH:mm");
+*/
+
+          totalResult.innerHTML = "________________________<br /><b>Total: " + total + "</b>";
+          input.value = "";
+          input.focus();
+        }
+        
+        input.addEventListener('keyup', (e) => {
+          if (e.keyCode == 13) { //apertar enter depois de digitar
+            generateBtn.focus();
+            somar();
+          }
+        });
+        
+        generateBtn.addEventListener("click", () => {
+          somar();        
+        });
+        
+        eraseBtn.addEventListener("click", () => {
+          if (durations.length > 0) {
+            durations.pop(); //remover último horário no array
+            calculo();
+          }
+          else {
+            durations = [];
+            calculo();
+            totalResult.innerHTML = "";
+          }
+        });
+
+        clearBtn.addEventListener("click", () => {
+          durations = [];
+          calculo();
+          totalResult.innerHTML = "";
+        });
+      }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.32/moment-timezone-with-data.min.js"></script>
+  </body>
+</html>

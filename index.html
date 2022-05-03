@@ -139,6 +139,10 @@
             background-color: #249fe6;
             color: #fff;
         }
+        .marine {
+            background-color: #034c77;
+            color: #fff;
+        }
         .orange {
             background-color: #ec5d10;
             color: #fff;
@@ -147,6 +151,7 @@
             background-color: #4e6369;
             color: #fff;
         }
+
         #qtdeFerramentas {
             font-weight: bold;
         }
@@ -218,13 +223,16 @@
             <h2>Textos</h2>
             <div id="cardsTextos" class="items"></div>
 
+            <h2>Calculadoras</h2>
+            <div id="cardsCalculadoras" class="items"></div>
+
             <h2>Financeiro</h2>
             <div id="cardsFinanceiros" class="items"></div>
 
             <h2>Informações</h2>
             <div id="cardsInformacoes" class="items"></div>
 
-            <h2>Calcular e Sortear</h2>
+            <h2>Geradores e Sortear</h2>
             <div id="cardsSorteadores" class="items"></div>
 
 
@@ -270,7 +278,7 @@
                 link: '/lista-tarefas/',
                 descricao: 'Utilize para quando você precisar fazer uma lista de tarefas rápida.',
                 icon: 'task_alt',
-                cor: 'blue'
+                cor: 'marine'
             },
             {
                 nome: 'Contar Caracteres',
@@ -291,7 +299,7 @@
                 link: '/calculadora-datas/',
                 descricao: 'Esta calculadora de datas encontra a diferença de dias entre duas datas.',
                 icon: 'calendar_month',
-                cor: 'black'
+                cor: 'blue'
             },
             {
                 nome: 'Calculadora de Combustível',
@@ -321,6 +329,14 @@
                 icon: 'tour',
                 cor: 'gray'
             },
+            {
+                nome: 'Calculadora de Horas',
+                link: '/calculadora-horas/',
+                descricao: 'Calcule horas e minutos de forma fácil e rápida',
+                icon: 'av_timer',
+                cor: 'blue'
+            },
+
         ];
         loadCards(links, '#cards', 'card');
         cardsSection();
@@ -352,8 +368,9 @@
         function cardsSection() {
             let linksSection = "";
             section('red', '#cardsYoutube');
-            section('blue', '#cardsUtilidades');
+            section('marine', '#cardsUtilidades');
             section('orange', '#cardsTextos');
+            section('blue', '#cardsCalculadoras');
             section('green', '#cardsFinanceiros');
             section('gray', '#cardsInformacoes');
             section('black', '#cardsSorteadores');
