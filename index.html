@@ -152,6 +152,10 @@
             background-color: #4e6369;
             color: #fff;
         }
+        .whatsapp {
+            background-color: #128C7E;
+            color: #fff;
+        }
 
         #qtdeFerramentas {
             font-weight: bold;
@@ -218,6 +222,9 @@
             <h2>Youtube</h2>
             <div id="cardsYoutube" class="items"></div>
 
+            <h2>WhatsApp</h2>
+            <div id="cardsWhatsapp" class="items"></div>
+
             <h2>Utilidades Diárias</h2>
             <div id="cardsUtilidades" class="items"></div>
 
@@ -233,7 +240,7 @@
             <h2>Informações</h2>
             <div id="cardsInformacoes" class="items"></div>
 
-            <h2>Geradores e Sortear</h2>
+            <h2>Geradores e Sorteadores</h2>
             <div id="cardsSorteadores" class="items"></div>
 
 
@@ -337,6 +344,13 @@
                 icon: 'av_timer',
                 cor: 'blue'
             },
+            {
+                nome: 'WhatsApp Link',
+                link: '/whatsapp-link/',
+                descricao: 'Inicie uma conversa com uma pessoa sem precisar cadastrar nos seus contatos',
+                icon: 'chat',
+                cor: 'whatsapp'
+            },
 
         ];
         loadCards(links, '#cards', 'card');
@@ -369,6 +383,7 @@
         function cardsSection() {
             let linksSection = "";
             section('red', '#cardsYoutube');
+            section('whatsapp', '#cardsWhatsapp');
             section('marine', '#cardsUtilidades');
             section('orange', '#cardsTextos');
             section('blue', '#cardsCalculadoras');
