@@ -140,6 +140,10 @@
             background-color: #249fe6;
             color: #fff;
         }
+        .marine {
+            background-color: #034c77;
+            color: #fff;
+        }
         .orange {
             background-color: #ec5d10;
             color: #fff;
@@ -148,6 +152,11 @@
             background-color: #4e6369;
             color: #fff;
         }
+        .whatsapp {
+            background-color: #128C7E;
+            color: #fff;
+        }
+
         #qtdeFerramentas {
             font-weight: bold;
         }
@@ -187,6 +196,16 @@
     </style>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4150345279897826"
     crossorigin="anonymous"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J8WCHHDTM9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-J8WCHHDTM9');
+    </script>
 </head>
 <body>
     <header>
@@ -213,11 +232,17 @@
             <h2>Youtube</h2>
             <div id="cardsYoutube" class="items"></div>
 
+            <h2>WhatsApp</h2>
+            <div id="cardsWhatsapp" class="items"></div>
+
             <h2>Utilidades Diárias</h2>
             <div id="cardsUtilidades" class="items"></div>
 
             <h2>Textos</h2>
             <div id="cardsTextos" class="items"></div>
+
+            <h2>Calculadoras</h2>
+            <div id="cardsCalculadoras" class="items"></div>
 
             <h2>Financeiro</h2>
             <div id="cardsFinanceiros" class="items"></div>
@@ -225,7 +250,7 @@
             <h2>Informações</h2>
             <div id="cardsInformacoes" class="items"></div>
 
-            <h2>Calcular e Sortear</h2>
+            <h2>Geradores e Sorteadores</h2>
             <div id="cardsSorteadores" class="items"></div>
 
 
@@ -271,7 +296,7 @@
                 link: '/lista-tarefas/',
                 descricao: 'Utilize para quando você precisar fazer uma lista de tarefas rápida.',
                 icon: 'task_alt',
-                cor: 'blue'
+                cor: 'marine'
             },
             {
                 nome: 'Contar Caracteres',
@@ -292,7 +317,7 @@
                 link: '/calculadora-datas/',
                 descricao: 'Esta calculadora de datas encontra a diferença de dias entre duas datas.',
                 icon: 'calendar_month',
-                cor: 'black'
+                cor: 'blue'
             },
             {
                 nome: 'Calculadora de Combustível',
@@ -321,6 +346,20 @@
                 descricao: 'Informações como população, idioma, moeda, bandeira e mais.',
                 icon: 'tour',
                 cor: 'gray'
+            },
+            {
+                nome: 'Calculadora de Horas',
+                link: '/calculadora-horas/',
+                descricao: 'Calcule horas e minutos de forma fácil e rápida',
+                icon: 'av_timer',
+                cor: 'blue'
+            },
+            {
+                nome: 'WhatsApp Link',
+                link: '/whatsapp-link/',
+                descricao: 'Inicie uma conversa com uma pessoa sem precisar cadastrar nos seus contatos',
+                icon: 'chat',
+                cor: 'whatsapp'
             },
             {
                 nome: 'Gerador de QR Code',
@@ -360,8 +399,10 @@
         function cardsSection() {
             let linksSection = "";
             section('red', '#cardsYoutube');
-            section('blue', '#cardsUtilidades');
+            section('whatsapp', '#cardsWhatsapp');
+            section('marine', '#cardsUtilidades');
             section('orange', '#cardsTextos');
+            section('blue', '#cardsCalculadoras');
             section('green', '#cardsFinanceiros');
             section('gray', '#cardsInformacoes');
             section('black', '#cardsSorteadores');

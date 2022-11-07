@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    
+    <title>WhatsApp Link Direto- MiniFerramentas</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">    
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+	<meta name="author" content="MiniFerramentas.com.br">
+	<meta name="description" content="Iniciar conversa no WhatsApp sem precisar salvar o contato - Site fácil de ser utilizado" />
+	<meta name="keywords" content="pegar thumbnail, gerar thumbnail, pegar miniatura, gerar miniatura, pegar thumb, gerar thumb" />
+	<meta name="robots" content="index,follow">
+	<meta property="og:title" content="Iniciar conversa no WhatsApp sem precisar salvar o contato">
+	<meta property="og:site_name" content="Iniciar conversa no WhatsApp sem precisar salvar o contato">
+	<meta property="og:description" content="Iniciar conversa no WhatsApp sem precisar salvar o contato - Site fácil de ser utilizado">
+	<meta property="og:url" content="https://miniferramentas.com.br/pegar-miniaturas-youtube">
+	<meta property="og:image" content="">
+	<meta property="og:image:type" content="image/jpeg">
+
+    <link rel="stylesheet" href="../style.css">
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <style type="text/css">
+		.container{
+			max-width: 800px;
+			margin:10px auto;
+			padding:0 2%;
+			text-align: center;
+		}
+		.container h2{
+			font-size: 40px;
+			margin:30px 0;
+		}
+
+		.container > p{
+			font-size: 19px;
+            margin-bottom: 20px;
+		}
+
+		.container input[type=text]{
+			width:100%;
+			border-radius:8px;
+			height: 40px;
+			border: 1px solid #ccc;
+            text-align: center;
+            font-size: 20px;
+		}
+
+		.container input[type=submit]{
+			display: block;
+			margin:10px 0;
+			font-size: 20px;
+			color: white;
+			width:100%;
+			height: 40px;
+			cursor: pointer;
+			border: 0;
+            border-radius: 5px;
+			background-color: #128C7E;
+		}
+
+        .resultado {
+            margin: 30px 0;
+        }
+
+        .tamanho-imagem {
+            background-color: #0e0e0e;
+            color: white;
+            margin: 10px auto 0 auto;
+        }
+
+        
+	</style>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J8WCHHDTM9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-J8WCHHDTM9');
+    </script>
+</head>
+<body>
+    <header>
+        <h1>WhatsApp Link Direto</h1>
+    </header>
+    <main>
+        <div class="container">
+            <p>
+                Para iniciar uma conversa no WhatsApp sem precisar salvar o número<br/>
+                basta inserir o número do telefone, apenas os dígitos:<br/><br />
+                <!--<b>(99) 99999-9999</b>-->
+            </p>
+
+            <div>
+                <input type="text" name="telefone" id="telefone" placeholder="(99) 99999-9999">
+                <input type="submit" name="btn" value="Iniciar conversa no WhatsApp!">
+            </div>
+                        
+            <div class="descricao">
+                <p>Esta ferramenta tem o objetivo de ser utilizada para iniciar uma conversa no aplicativo de conversas WhatsApp sem precisar salvar o número nos seus contatos.</p>
+                <p>Sua utilização é bem simples, apenas digite o número do WhatsApp no campo acima e clique no botão para ser redirecionado para o seu aplicativo e iniciar a conversa.</p>
+                <p>Observação: Válido apenas para números do Brasil (+55).</p>
+            </div>
+
+            <h4>Ferramenta simples e elegante! <br />
+                Achou útil? <a href="/index.html">Conheça mais!</a></h4>
+            
+        </div>
+    </main>
+    <footer>Esta ferramenta foi desenvolvida por <a href="/index.html">MiniFerramentas</a>.</footer>
+
+    <script>
+        document.querySelector('input[type=submit]').addEventListener('click',()=> {
+            let number = document.querySelector('input[name=telefone]').value;
+
+            if (number.length < 15) {
+                alert("Insira um número no formato indicado.")
+            }
+            else {
+                window.open("http://api.whatsapp.com/send?1=pt_br&phone=55" + number.replace(/\D/g,""));
+            }
+            
+        });
+
+        /* Máscaras ER */
+        function mascara(o,f){
+            v_obj=o
+            v_fun=f
+            setTimeout("execmascara()",1)
+        }
+        function execmascara(){
+            v_obj.value=v_fun(v_obj.value)
+        }
+        
+        function mtel(v){
+            v=v.replace(/\D/g,""); //Remove tudo o que não é dígito
+            v=v.replace(/^(\d{2})(\d)/g,"($1) $2"); //Coloca parênteses em volta dos dois primeiros dígitos
+            v=v.replace(/(\d)(\d{4})$/,"$1-$2"); //Coloca hífen entre o quarto e o quinto dígitos
+            return v;
+        }
+        function id( el ){
+            return document.getElementById( el );
+        }
+        window.onload = function(){
+            id('telefone').onkeyup = function(){
+                mascara( this, mtel );
+            }
+        }
+        
+    </script>
+</body>
+</html>
