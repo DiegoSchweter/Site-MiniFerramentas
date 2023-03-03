@@ -3,7 +3,7 @@
 
 <head>
 
-    <title>Conversor de Moedas - MiniFerramentas</title>
+    <title>Gerador de Recibos - MiniFerramentas</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -32,12 +32,11 @@
             border-radius: 0.5em;
             box-shadow: 0 1.2em 2.8em rgba(0, 41, 22, 0.2);
         }
-
+        
         .wrapper {
             display: flex;
             justify-content: space-between;
             gap: 3em;
-            margin-top: 30px;
         }
 
         label {
@@ -48,7 +47,6 @@
 
         input {
             display: block;
-            width: 50%;
             font-size: 20px;
             border: none;
             color: #444b5f;
@@ -110,15 +108,12 @@
 
     <main>
         <div class="container">
-            <label for="entrada">Nome</label>
 
-            <div class="wrapper">
-                <input id="name" type="text">
-
+            <button id="gerar">
+                Gerar Recibo
+            </button>
                 
-            </div>
 
-            <button id="btnGerar">Gerar Recibo</button>
         </div>
 
         <div class="descricao">
@@ -133,42 +128,95 @@
 
 
     <!-- Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/extenso@2.0.1/dist/extenso.min.js"></script>
     <script>
-        // Crie um novo objeto jsPDF
+
+        document.getElementById("gerar").addEventListener("click", gerarRecibo);
+
+        function gerarRecibo() {
             var doc = new jsPDF();
 
-            // Defina as informações do recibo
+            var numero = "12345";
             var nomeCliente = "Fulano de Tal";
-            var quantia = "R$ 100,00";
+            var valor = "10.000,00";
             var referencia = "Pagamento de Serviços";
             var data = "01/03/2023";
             var assinatura = "João da Silva";
             var nomeEmpresa = "Minha Empresa";
+            var cnpj = "99.999.999/0001-99";
+            var endereco = "Rua teste";
 
-            // Defina o estilo do texto
+
             doc.setFont("helvetica");
             doc.setFontType("bold");
-            doc.setFontSize(20);
-            doc.setTextColor(0, 0, 255);
+            //doc.setFontSize(20);
+            
+            doc.rect(10, 10, 190, 100, "S"); // x, y, w, h, type
 
-            // Adicione as informações do recibo ao PDF
-            doc.text("Recibo", 10, 10);
+            //doc.setDrawColor(150, 150, 150);
+            doc.text(15, 20, 'RECIBO Nº');
+            doc.setFillColor(220, 220, 220);
+            doc.rect(50, 13, 50, 10, "F");
+            doc.text(95, 20, numero, "right");
 
-            doc.setFontSize(12);
-            doc.setTextColor(0, 0, 0);
-            doc.text("Nome do cliente: " + nomeCliente, 10, 30);
-            doc.text("Quantia: " + quantia, 10, 40);
-            doc.text("Referência: " + referencia, 10, 50);
-            doc.text("Data: " + data, 10, 60);
+            doc.text(120, 20, 'VALOR');
+            doc.setFillColor(220, 220, 220);
+            doc.rect(145, 13, 50, 10, "F");
+            doc.text(190, 20, "R$ " + valor, "right");
 
-            doc.setFontType("italic");
-            doc.text("Assinatura: " + assinatura, 10, 80);
+            doc.setFontSize(11);
+            
+            doc.text(15, 30, "Recebi(emos) de");            
+            doc.setFontType("normal");
+            doc.text(50, 30, nomeCliente);
+            doc.text(50, 31, "___________________________________________________________________");
 
             doc.setFontType("bold");
-            doc.text("Nome da empresa: " + nomeEmpresa, 10, 90);
+            doc.text(15, 40, "a quantia de");
+            doc.setFontType("normal");
+            doc.text(50, 40, extenso(valor, { mode: 'currency' }));
+            doc.text(50, 41, "___________________________________________________________________");
 
-            // Salve o PDF com a função save()
-            doc.save("recibo.pdf");
+            doc.setFontType("bold");
+            doc.text(15, 50, "correspondente a");
+            doc.setFontType("normal");
+            doc.text(50, 50, referencia);
+            doc.text(50, 51, "___________________________________________________________________");
+
+            doc.setFontType("bold");
+            doc.text(15, 60, "e para clareza firmo(amos) o presente.");
+
+            doc.text(190, 70, "Bauru, " + data, "right");
+
+            doc.setFontType("bold");
+            doc.text(15, 80, "Assinatura");
+            doc.setFontType("normal");
+            doc.text(50, 80, assinatura);
+            doc.text(50, 81, "___________________________________________________________________");
+
+            doc.setFontType("bold");
+            doc.text(15, 90, "Nome");
+            doc.setFontType("normal");
+            doc.text(50, 90, nomeEmpresa);
+            doc.text(50, 91, "__________________________________");
+
+            doc.setFontType("bold");
+            doc.text(130, 90, "CNPJ");
+            doc.setFontType("normal");
+            doc.text(145, 90, cnpj);
+            doc.text(145, 91, "_______________________");
+
+            doc.setFontType("bold");
+            doc.text(15, 100, "Endereço");
+            doc.setFontType("normal");
+            doc.text(50, 100, endereco);
+            doc.text(50, 101, "___________________________________________________________________");
+
+
+
+            doc.save('recibo.pdf')
+        }
 
     </script>
 </body>
