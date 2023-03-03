@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <title>Conversor de Moedas - MiniFerramentas</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="author" content="MiniFerramentas.com.br">
+    <meta name="description" content="Conversor de Moedas - Site fácil de ser utilizado" />
+    <meta name="keywords" content="conversor de moedas" />
+    <meta name="robots" content="index,follow">
+    <meta property="og:title" content="Conversor de Moedas">
+    <meta property="og:site_name" content="Conversor de Moedas">
+    <meta property="og:description" content="Conversor de Moedas - Site fácil de ser utilizado">
+    <meta property="og:url" content="https://miniferramentas.com.br/contador-moedas">
+    <meta property="og:image" content="">
+    <meta property="og:image:type" content="image/jpeg">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" />
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .container {
+            background-color: #ffffff;
+            width: 85%;
+            max-width: 550px;
+            margin: 50px auto;
+            padding: 3em;
+            border-radius: 0.5em;
+            box-shadow: 0 1.2em 2.8em rgba(0, 41, 22, 0.2);
+        }
+
+        .wrapper {
+            display: flex;
+            justify-content: space-between;
+            gap: 3em;
+            margin-top: 30px;
+        }
+
+        label {
+            font-size: 18px;
+            font-weight: bold;
+            color: #242e4c;
+        }
+
+        input {
+            display: block;
+            width: 50%;
+            font-size: 20px;
+            border: none;
+            color: #444b5f;
+            border-bottom: 1.5px solid #242e4c;
+            padding: 10px;
+            margin-top: 10px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #333;
+        }
+
+        select {
+            display: block;
+            width: 50%;
+            font-size: 16px;
+            border: none;
+            border-bottom: 1.5px solid #242e4c;
+            outline: none;
+
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            font-size: 18px;
+            margin: 38px 0 18px 0;
+            background-color: #333;
+            padding: 14px 0;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            color: #ffffff;
+        }
+
+        .result {
+            text-align: center;
+            font-size: 30px;
+            color: #242e4c;
+        }
+    </style>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J8WCHHDTM9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-J8WCHHDTM9');
+    </script>
+</head>
+
+<body>
+    <header>
+        <h1>Gerador de Recibo</h1>
+    </header>
+
+    <main>
+        <div class="container">
+            <label for="entrada">Nome</label>
+
+            <div class="wrapper">
+                <input id="name" type="text">
+
+                
+            </div>
+
+            <button id="btnGerar">Gerar Recibo</button>
+        </div>
+
+        <div class="descricao">
+            <p>Gerar Recibo...</p>
+        </div>
+
+        <h4>Ferramenta simples e elegante! <br />
+            Achou útil? <a href="/index.html">Conheça mais!</a></h4>
+    </main>
+
+    <footer>Esta ferramenta foi desenvolvida por <a href="/index.html">MiniFerramentas</a>.</footer>
+
+
+    <!-- Script -->
+    <script>
+        // Crie um novo objeto jsPDF
+            var doc = new jsPDF();
+
+            // Defina as informações do recibo
+            var nomeCliente = "Fulano de Tal";
+            var quantia = "R$ 100,00";
+            var referencia = "Pagamento de Serviços";
+            var data = "01/03/2023";
+            var assinatura = "João da Silva";
+            var nomeEmpresa = "Minha Empresa";
+
+            // Defina o estilo do texto
+            doc.setFont("helvetica");
+            doc.setFontType("bold");
+            doc.setFontSize(20);
+            doc.setTextColor(0, 0, 255);
+
+            // Adicione as informações do recibo ao PDF
+            doc.text("Recibo", 10, 10);
+
+            doc.setFontSize(12);
+            doc.setTextColor(0, 0, 0);
+            doc.text("Nome do cliente: " + nomeCliente, 10, 30);
+            doc.text("Quantia: " + quantia, 10, 40);
+            doc.text("Referência: " + referencia, 10, 50);
+            doc.text("Data: " + data, 10, 60);
+
+            doc.setFontType("italic");
+            doc.text("Assinatura: " + assinatura, 10, 80);
+
+            doc.setFontType("bold");
+            doc.text("Nome da empresa: " + nomeEmpresa, 10, 90);
+
+            // Salve o PDF com a função save()
+            doc.save("recibo.pdf");
+
+    </script>
+</body>
+
+</html>
