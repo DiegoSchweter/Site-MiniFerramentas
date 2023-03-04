@@ -9,13 +9,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <meta name="author" content="MiniFerramentas.com.br">
-    <meta name="description" content="Conversor de Moedas - Site fácil de ser utilizado" />
-    <meta name="keywords" content="conversor de moedas" />
+    <meta name="description" content="Gerador de Recibos - Site fácil de ser utilizado" />
+    <meta name="keywords" content="Gerador de Recibos" />
     <meta name="robots" content="index,follow">
-    <meta property="og:title" content="Conversor de Moedas">
-    <meta property="og:site_name" content="Conversor de Moedas">
-    <meta property="og:description" content="Conversor de Moedas - Site fácil de ser utilizado">
-    <meta property="og:url" content="https://miniferramentas.com.br/contador-moedas">
+    <meta property="og:title" content="Gerador de Recibos">
+    <meta property="og:site_name" content="Gerador de Recibos">
+    <meta property="og:description" content="Gerador de Recibos - Site fácil de ser utilizado">
+    <meta property="og:url" content="https://miniferramentas.com.br/gerador-recibo">
     <meta property="og:image" content="">
     <meta property="og:image:type" content="image/jpeg">
 
@@ -34,19 +34,26 @@
         }
         
         .wrapper {
-            display: flex;
+            display: block;
             justify-content: space-between;
             gap: 3em;
+        }
+
+        .input-wrapper {
+            width: 100%;
+            display: flex;
+            align-items: flex-end;
         }
 
         label {
             font-size: 18px;
             font-weight: bold;
             color: #242e4c;
+            width:40%;
         }
 
         input {
-            display: block;
+            /*display: block;*/
             font-size: 20px;
             border: none;
             color: #444b5f;
@@ -54,6 +61,7 @@
             padding: 10px;
             margin-top: 10px;
             outline: none;
+            width:60%;
         }
 
         input:focus {
@@ -108,12 +116,45 @@
 
     <main>
         <div class="container">
-
-            <button id="gerar">
-                Gerar Recibo
-            </button>
-                
-
+            <div class="wrapper">
+                <div class="input-wrapper">
+                    <label for="numero">Número:</label>
+                    <input type="text" id="numero" />
+                </div>
+                <div class="input-wrapper">
+                    <label for="nomeCliente">Nome do Cliente:</label>
+                    <input type="text" id="nomeCliente" />
+                </div>
+                <div class="input-wrapper">
+                    <label for="valor">Valor:</label>
+                    <input type="money" id="valor" />
+                </div>
+                <div class="input-wrapper">
+                    <label for="referencia">Referente a:</label>
+                    <input type="text" id="referencia" />
+                </div>
+                <div class="input-wrapper">
+                    <label for="data">Data:</label>
+                    <input type="date" id="data" />
+                </div>
+                <div class="input-wrapper">
+                    <label for="assinatura">Assinatura:</label>
+                    <input type="text" id="assinatura" />
+                </div>
+                <div class="input-wrapper">
+                    <label for="nomeEmpresa">Nome da Empresa:</label>
+                    <input type="text" id="nomeEmpresa" />
+                </div>
+                <div class="input-wrapper">
+                    <label for="cnpj">CNPJ:</label>
+                    <input type="text" id="cnpj" />
+                </div>
+                <div class="input-wrapper">
+                    <label for="endereco">Endereço:</label>
+                    <input type="text" id="endereco" />
+                </div>
+            </div>
+            <button id="gerar">Gerar Recibo</button>
         </div>
 
         <div class="descricao">
@@ -132,29 +173,27 @@
     <script src="https://cdn.jsdelivr.net/npm/extenso@2.0.1/dist/extenso.min.js"></script>
     <script>
 
-        document.getElementById("gerar").addEventListener("click", gerarRecibo);
+        document.querySelector("#gerar").addEventListener("click", gerarRecibo);
 
         function gerarRecibo() {
             var doc = new jsPDF();
 
-            var numero = "12345";
-            var nomeCliente = "Fulano de Tal";
-            var valor = "10.000,00";
-            var referencia = "Pagamento de Serviços";
-            var data = "01/03/2023";
-            var assinatura = "João da Silva";
-            var nomeEmpresa = "Minha Empresa";
-            var cnpj = "99.999.999/0001-99";
-            var endereco = "Rua teste";
+            var numero = document.querySelector("#numero").value;
+            var nomeCliente = document.querySelector("#nomeCliente").value;
+            var valor = document.querySelector("#valor").value;
+            var referencia = document.querySelector("#referencia").value;
+            var data = document.querySelector("#data").value;
+            var assinatura = document.querySelector("#assinatura").value;
+            var nomeEmpresa = document.querySelector("#nomeEmpresa").value;
+            var cnpj = document.querySelector("#cnpj").value;
+            var endereco = document.querySelector("#endereco").value;
 
 
             doc.setFont("helvetica");
             doc.setFontType("bold");
-            //doc.setFontSize(20);
             
             doc.rect(10, 10, 190, 100, "S"); // x, y, w, h, type
 
-            //doc.setDrawColor(150, 150, 150);
             doc.text(15, 20, 'RECIBO Nº');
             doc.setFillColor(220, 220, 220);
             doc.rect(50, 13, 50, 10, "F");
