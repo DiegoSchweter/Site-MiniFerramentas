@@ -192,7 +192,7 @@
             doc.setFont("helvetica");
             doc.setFontType("bold");
             
-            doc.rect(10, 10, 190, 100, "S"); // x, y, w, h, type
+            doc.rect(10, 10, 190, 100, "S", 2); // x, y, w, h, type
 
             doc.text(15, 20, 'RECIBO Nº');
             doc.setFillColor(220, 220, 220);
@@ -226,7 +226,7 @@
             doc.setFontType("bold");
             doc.text(15, 60, "e para clareza firmo(amos) o presente.");
 
-            doc.text(190, 70, "Bauru, " + data, "right");
+            doc.text(190, 70, "Bauru, " + dataPorExtenso(new Date(data)), "right");
 
             doc.setFontType("bold");
             doc.text(15, 80, "Assinatura");
@@ -255,6 +255,17 @@
 
 
             doc.save('recibo.pdf')
+        }
+
+        function dataPorExtenso(data) {
+            var meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+                "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+
+            var dia = data.getDate();
+            var mes = meses[data.getMonth()];
+            var ano = data.getFullYear();
+
+            return dia + " de " + mes + " de " + ano;
         }
 
     </script>
